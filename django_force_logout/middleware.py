@@ -9,7 +9,10 @@ class ForceLogoutMiddleware(object):
     SESSION_KEY = 'force-logout:last-login'
 
     def __init__(self):
-        self.fn = from_dotted_path(app_settings.CALLBACK)
+        self.fn = app_settings.CALLBACK
+
+        if not callable(self.fn):
+            self.fn = from_dotted_path(app_settings.CALLBACK)
 
         def callback(sender, user=None, request=None, **kwargs):
             if request:
