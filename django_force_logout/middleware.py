@@ -25,7 +25,7 @@ class ForceLogoutMiddleware(object):
 
         user_timestamp = self.fn(request.user)
 
-        if not user_timestamp:
+        if user_timestamp is None:
             return
 
         try:
