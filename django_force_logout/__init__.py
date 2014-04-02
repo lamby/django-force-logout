@@ -81,6 +81,13 @@ A method which, when passed a User instance, will return a nullable timestamp fo
 that user. See **Installation** for more details.
 
 
+Thanks
+------
+
+This project was inspired by a code snippet by
+`Clement Nodet <http://clementnodet.com/>_`.
+
+
 Links
 -----
 
