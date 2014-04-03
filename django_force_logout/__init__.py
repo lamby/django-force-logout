@@ -55,8 +55,8 @@ Installation
    to expire before the user will actually be logged out.
 
 You are not restricted to returning a field from a SQL database (`Redis
-<http://redis.io/>`_ may suit your needs better and avoid caching), but you
-must return a nullable timestamp.
+<http://redis.io/>`_ may suit your needs better and avoid the caching
+requirement), but you must return a nullable timestamp.
 
 
 Usage
