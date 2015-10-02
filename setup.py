@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name='django_force_logout',
+    name='django-force-logout',
     version='0.1',
     packages=(
         'django_force_logout',
