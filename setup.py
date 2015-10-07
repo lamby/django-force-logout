@@ -1,11 +1,15 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
     name='django-force-logout',
+
+    url="https://chris-lamb.co.uk/projects/django-force-logout",
     version='0.1',
-    packages=(
-        'django_force_logout',
-    ),
-    install_requires=['django>=1.0'],
-    description="",
+    description="Framework to be able to forcibly log users out of Django projects",
+
+    author="Chris Lamb",
+    author_email='chris@chris-lamb.co.uk',
+    license="BSD",
+
+    packages=find_packages(),
 )
