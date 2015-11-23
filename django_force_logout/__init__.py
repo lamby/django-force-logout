@@ -1,8 +1,4 @@
 """
-.. image:: images/thread.png
-   :align: right
-   :target: http://dev.thread.com/
-
 ===================
 django-force-logout
 ===================
@@ -95,16 +91,8 @@ Homepage/documentation:
   https://django-force-logout.readthedocs.org/
 
 View/download code
-  https://github.com/thread/django-force-logout
+  https://github.com/lamby/django-force-logout
 
 File a bug
-  https://github.com/thread/django-force-logout/issues
-
-----
-
-.. figure:: images/thread.png
-   :align: center
-   :target: http://dev.thread.com/
-
-   `See more open source projects from Thread.com <http://dev.thread.com/>`_
+  https://github.com/lamby/django-force-logout/issues
 """
