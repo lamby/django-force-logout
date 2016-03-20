@@ -1,3 +1,4 @@
+import time
 import datetime
 
 from django.contrib import auth
@@ -16,7 +17,7 @@ class ForceLogoutMiddleware(object):
 
         def callback(sender, user=None, request=None, **kwargs):
             if request:
-                request.session[self.SESSION_KEY] = datetime.datetime.utcnow()
+                request.session[self.SESSION_KEY] = int(time.time())
         auth.signals.user_logged_in.connect(callback, weak=False)
 
     def process_request(self, request):
@@ -29,7 +30,9 @@ class ForceLogoutMiddleware(object):
             return
 
         try:
-            timestamp = request.session[self.SESSION_KEY]
+            timestamp = datetime.datetime.utcfromtimestamp(
+                request.session[self.SESSION_KEY],
+            )
         except KeyError:
             # May not have logged in since we started populating this key.
             return
