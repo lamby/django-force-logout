@@ -12,7 +12,7 @@ class ForceLogoutMiddleware(object):
         self.fn = app_settings.CALLBACK
 
         if not callable(self.fn):
-            self.fn = from_dotted_path(app_settings.CALLBACK)
+            self.fn = from_dotted_path(self.fn)
 
         def callback(sender, user=None, request=None, **kwargs):
             if request:
