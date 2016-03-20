@@ -1,3 +1,7 @@
+import importlib
+
+from django.core.urlresolvers import get_mod_func
+
 def from_dotted_path(fullpath):
     """
     Returns the specified attribute of a module, specified by a string.
@@ -9,9 +13,6 @@ def from_dotted_path(fullpath):
     except that ``d`` is returned and not entered into the current namespace.
     """
 
-    module, attr = fullpath.rsplit('.', 1)
+    module_name, fn_name = get_mod_func(fullpath)
 
-    return getattr(
-        __import__(module, {}, {}, (attr,)),
-        attr,
-    )
+    return getattr(importlib.import_module(module_name), fn_name)
