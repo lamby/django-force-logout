@@ -1,5 +1,6 @@
 import time
 import datetime
+import pytz
 
 from django.contrib import auth
 
@@ -34,10 +35,18 @@ class ForceLogoutMiddleware(object):
                 request.session[self.SESSION_KEY],
             )
         except KeyError:
-            # May not have logged in since we started populating this key.
-            return
-
-        if timestamp > user_timestamp:
-            return
+            # May not have logged in since we started populating this key.  If
+            # so, and the logout timestamp is set, we're supposed to log out
+            # this user.
+            pass
+        else:
+            try:
+                if timestamp > user_timestamp:
+                    return
+            except TypeError:
+                import pytz
+                utctimestamp = pytz.utc.localize(timestamp)
+                if utctimestamp > user_timestamp:
+                    return
 
         auth.logout(request)
