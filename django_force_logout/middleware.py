@@ -2,9 +2,9 @@ import time
 import datetime
 
 from django.contrib import auth
+from django.utils.module_loading import import_string
 
 from . import app_settings
-from .utils import from_dotted_path
 
 class ForceLogoutMiddleware(object):
     SESSION_KEY = 'force-logout:last-login'
@@ -13,7 +13,7 @@ class ForceLogoutMiddleware(object):
         self.fn = app_settings.CALLBACK
 
         if not callable(self.fn):
-            self.fn = from_dotted_path(self.fn)
+            self.fn = import_string(self.fn)
 
         def callback(sender, user=None, request=None, **kwargs):
             if request:
