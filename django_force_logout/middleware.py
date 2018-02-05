@@ -1,4 +1,5 @@
 import time
+import django
 import datetime
 
 from django.contrib import auth
@@ -6,7 +7,20 @@ from django.utils.module_loading import import_string
 
 from . import app_settings
 
-class ForceLogoutMiddleware(object):
+
+if django.VERSION > (1, 10):
+    from django.utils.deprecation import MiddlewareMixin
+
+    def is_authenticated(user):
+        return user.is_authenticated
+else:
+    MiddlewareMixin = object
+
+    def is_authenticated(user):
+        return user.is_authenticated()
+
+
+class ForceLogoutMiddleware(MiddlewareMixin):
     SESSION_KEY = 'force-logout:last-login'
 
     def __init__(self, get_response=None):
@@ -21,7 +35,7 @@ class ForceLogoutMiddleware(object):
         auth.signals.user_logged_in.connect(callback, weak=False)
 
     def process_request(self, request):
-        if not request.user.is_authenticated():
+        if not is_authenticated(request.user):
             return
 
         user_timestamp = self.fn(request.user)
