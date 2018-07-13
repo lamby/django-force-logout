@@ -24,6 +24,8 @@ class ForceLogoutMiddleware(MiddlewareMixin):
     SESSION_KEY = 'force-logout:last-login'
 
     def __init__(self, get_response=None):
+        super(ForceLogoutMiddleware, self).__init__(get_response)
+
         self.fn = app_settings.CALLBACK
 
         if not callable(self.fn):
