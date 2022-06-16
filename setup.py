@@ -6,7 +6,7 @@ setup(
     name='django-force-logout',
 
     url="https://chris-lamb.co.uk/projects/django-force-logout",
-    version='3.2.1',
+    version='3.2.2',
     description="Framework to be able to forcibly log users out of Django projects",
 
     author="Chris Lamb",
